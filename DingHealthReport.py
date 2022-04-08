@@ -11,7 +11,7 @@ Created on Wed Jul 21 10:13:13 2021
 # 参考代码：https://github.com/lgaheilongzi/ZJU-Clock-In#readme
 import requests
 import re
-import time 
+import time
 import datetime
 import json
 
@@ -140,6 +140,6 @@ def deal_person2():
     respon = session.post(url_save, data = Forms, headers = headers).content
     print(respon.decode())
 
-deal_person1
-deal_person2
 
+deal_person1()
+deal_person2()
