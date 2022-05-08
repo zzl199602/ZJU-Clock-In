@@ -14,6 +14,15 @@ import re
 import time
 import datetime
 import json
+import ddddocr
+
+def get_code():
+# 获取验证码
+    url_code = 'https://healthreport.zju.edu.cn/ncov/wap/default/code'
+    ocr = ddddocr.DdddOcr()
+    resp = session.get(url_code)
+    code = ocr.classification(resp.content)
+    return code
 
 
 def get_date():
@@ -73,8 +82,10 @@ def deal_person1():
     new_info['jcqzrq'] = ""
     new_info['gwszdd'] = ""
     new_info['szgjcs'] = ""
+    
 
     Forms = new_info
+    Forms['verifyCode'] = get_code()
 
     # 获取回应
     respon = session.post(url_save, data = Forms, headers = headers).content
@@ -135,6 +146,7 @@ def deal_person2():
     new_info['szgjcs'] = ""
 
     Forms = new_info
+    Forms['verifyCode'] = get_code()
 
     # 获取回应
     respon = session.post(url_save, data = Forms, headers = headers).content
