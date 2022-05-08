@@ -16,7 +16,7 @@ import datetime
 import json
 import ddddocr
 
-def get_code():
+def get_code(session):
 # 获取验证码
     url_code = 'https://healthreport.zju.edu.cn/ncov/wap/default/code'
     ocr = ddddocr.DdddOcr()
@@ -85,7 +85,7 @@ def deal_person1():
     
 
     Forms = new_info
-    Forms['verifyCode'] = get_code()
+    Forms['verifyCode'] = get_code(session)
 
     # 获取回应
     respon = session.post(url_save, data = Forms, headers = headers).content
@@ -146,7 +146,7 @@ def deal_person2():
     new_info['szgjcs'] = ""
 
     Forms = new_info
-    Forms['verifyCode'] = get_code()
+    Forms['verifyCode'] = get_code(session)
 
     # 获取回应
     respon = session.post(url_save, data = Forms, headers = headers).content
